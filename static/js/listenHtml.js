@@ -3,8 +3,8 @@
     var typeprodut ="";
 
     function listProdut(){
-         document.getElementById("list-product").click();
-         getProducts();    
+        document.getElementById("list-product").click();
+        getProducts();    
       
         apiModule.callAPI("listProducts", {}).then(function(response) {
             Utils.tpl(d.querySelector('.side-content'), 'list-products', {  
@@ -22,8 +22,8 @@
 
     function getProducts(){
         apiModule.callAPI("selectTypeProduct", {}).then(function(response) { 
-                typeprodut = response;
-                return ;
+            typeprodut = response;
+            return ;
         })
         .catch(function(error) {
             console.error("Erro ao chamar a API:", error);
@@ -138,8 +138,11 @@ $(document).click(function(event) {
         if (confirm("Deseja realmente sair? A venda será cancelada.")) {
             clearProductsSale();
             sale = 0;
-        }else{
             return;
+        }else{
+            listProductSale();
+            //listSale();
+            //
         }
     }
 });

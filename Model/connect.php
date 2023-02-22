@@ -5,13 +5,14 @@ class Connection {
     
     // Método construtor privado para evitar a criação de novas instâncias.
     private function __construct() {
-        $host = 'localhost';
-        $port = '5432';
-        $dbname = 'supermarket';
-        $dbuser = 'softExpMarket';
-        $dbpassword = 'Amc01pka@';
+        $jsonString = file_get_contents('./databaseConfig.json');
+        $config = json_decode($jsonString, true);
+        $host = $config['database']['host'];
+        $user = $config['database']['user'];
+        $password = $config['database']['password'];
+        $dbname = $config['database']['databaseName'];
 
-        $this->conn = new PDO("pgsql:host=$host;dbname=$dbname", $dbuser, $dbpassword);
+        $this->conn = new PDO("pgsql:host=$host;dbname=$dbname", $user, $password);
         $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
     
